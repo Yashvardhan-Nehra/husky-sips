@@ -1,0 +1,11 @@
+node_modules
+dist
+.local
+.env
+.env.*.local
+.DS_Store
+*.log
+# Large media: host episode videos on a CDN or video platform before launch (see docs/INTEGRATION_CHECKLIST.md)
+public/media/*.mp4
+raw-assets/video/*.mp4
+raw-assets/map/*.geojson

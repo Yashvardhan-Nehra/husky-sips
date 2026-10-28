@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="HuskySips">
+  <!-- Placeholder mark until the approved puppy logo is supplied (see docs/ASSET_MANIFEST.md) -->
+  <rect width="64" height="64" rx="16" fill="#183B2A"/>
+  <path d="M22 18h20v6l-3 22a4 4 0 0 1-4 3h-6a4 4 0 0 1-4-3l-3-22v-6z" fill="#F7F3E8"/>
+  <path d="M24 30h16l-2 14a2 2 0 0 1-2 2h-8a2 2 0 0 1-2-2l-2-14z" fill="#D94B49"/>
+  <circle cx="35" cy="36" r="3" fill="#F2C84B"/>
+  <path d="M38 12c4-2 7 1 7 4-3 1-6 0-7-4z" fill="#6D8C45"/>
+</svg>

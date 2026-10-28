@@ -1,0 +1,36 @@
+{
+  "name": "huskysips-site",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "HuskySips — Sip the drink. Eat the fruit. Launch website.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -p tsconfig.json --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "assets:images": "node scripts/optimize-images.mjs",
+    "assets:map": "node scripts/build-map.cjs raw-assets/map/india-soi.geojson src/data/india-map.ts"
+  },
+  "dependencies": {
+    "gsap": "3.15.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "react-router-dom": "7.18.4"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.5",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.1.2",
+    "sharp": "0.35.5",
+    "typescript": "5.9.3",
+    "vite": "8.3.5",
+    "vitest": "5.0.5"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
