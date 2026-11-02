@@ -29,6 +29,7 @@ Node 22+ required.
 | Animation layer assets | `src/assets/stage-manifest.ts` + `public/assets/stage/` |
 | Brand logo / mascot files | `public/assets/brand/` (then set `brand.logo` / `brand.mascot` in the config) |
 | Colours, type, spacing | `src/styles/tokens.css` |
+| Recipe / ingredient colour palettes | `src/config/palette.ts` |
 | Environment (form endpoint, analytics, Turnstile, site URL) | `.env.local` (copy from `.env.example`) |
 
 ## Honesty rules (enforced by the code)

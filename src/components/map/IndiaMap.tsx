@@ -18,7 +18,8 @@ export function project(lat: number, lng: number): { x: number; y: number } {
   return { x: pad + (lng - minLon) * sx, y: pad + (yTop - mercY) * sy };
 }
 
-const PIN_COLORS: Record<PinKind, string> = { popup: '#b3302f', sales: '#183b2a', home: '#6d8c45' };
+/** Marker colours come from the global tokens in src/styles/tokens.css. */
+const PIN_COLORS: Record<PinKind, string> = { popup: 'var(--map-popup)', sales: 'var(--map-sales)', home: 'var(--map-home)' };
 
 interface Props {
   pins: MapPin[];
@@ -50,8 +51,8 @@ export function IndiaMap({ pins, selectedId = null, onSelect, title }: Props) {
                 onSelect(pin.id);
               }
             }}>
-              <circle className="ring" r={selected ? 22 : 14} fill={color} opacity={0.18} />
-              <circle className="core" r={selected ? 9 : 7} fill={color} stroke="#fff" strokeWidth={2.5} />
+              <circle className="ring" r={selected ? 22 : 14} style={{ fill: color }} opacity={0.18} />
+              <circle className="core" r={selected ? 9 : 7} style={{ fill: color, stroke: 'var(--surface)' }} strokeWidth={2.5} />
               <text x={14} y={5}>
                 {pin.label}
               </text>

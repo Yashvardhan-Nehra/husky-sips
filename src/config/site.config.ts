@@ -17,10 +17,10 @@ export const siteConfig: SiteConfig = {
     name: 'HuskySips',
     tagline: 'Sip the drink. Eat the fruit.',
     description: 'A refreshing drink with fruit pieces you can enjoy, too.',
-    // Supply the existing puppy logo (unchanged) → public/assets/brand/, then set e.g.
-    // { src: '/assets/brand/huskysips-logo.svg', width: 160, height: 56 }
-    logo: null,
-    mascot: null,
+    // Approved puppy logo (artwork unchanged, white background removed). The mascot is a head-only
+    // crop of the same artwork, used small in loading, empty and confirmation states.
+    logo: { src: '/assets/brand/huskysips-logo.png', width: 512, height: 582 },
+    mascot: { src: '/assets/brand/huskysips-mascot.png', width: 400, height: 400 },
     founderName: 'Tarun',
   },
 

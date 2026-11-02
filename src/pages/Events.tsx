@@ -37,7 +37,7 @@ export default function Events() {
       <section className="events-hero">
         <div className="container events-hero__grid">
           <div>
-            <span className="eyebrow" style={{ color: 'var(--citrus)' }}>
+            <span className="eyebrow" style={{ color: 'var(--on-forest-accent)' }}>
               Events & Bulk
             </span>
             <h1>Your occasion. Your name. Your HuskySips.</h1>

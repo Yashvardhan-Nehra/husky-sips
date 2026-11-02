@@ -13,6 +13,7 @@ import { ProductCard } from '@/components/product/ProductCard';
 import { ProgressTracker } from '@/components/story/ProgressTracker';
 import { UpdatesForm } from '@/components/forms/UpdatesForm';
 import { formatDate } from '@/lib/format';
+import { getRecipePalette, paletteVars } from '@/config/palette';
 
 const AssemblyScroll = lazy(() => import('@/components/stage/AssemblyScroll'));
 
@@ -29,7 +30,7 @@ export default function Home() {
   return (
     <>
       {/* ---------- First screen: what, what's available, where ---------- */}
-      <section className="hero" aria-labelledby="hero-title">
+      <section className="hero" style={recipe ? paletteVars(getRecipePalette(recipe)) : undefined} aria-labelledby="hero-title">
         <div className="container hero__grid">
           <div className="hero__copy">
             <span className="eyebrow">Fruit Refreshers · Chilled, with real fruit pieces</span>

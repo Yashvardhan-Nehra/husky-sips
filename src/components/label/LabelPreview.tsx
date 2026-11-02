@@ -44,15 +44,15 @@ export function LabelPreview({ onUseInEnquiry }: { onUseInEnquiry?: (text: strin
         <svg className="label-svg" viewBox="0 0 420 300" role="img" aria-label={`Label preview reading ${safeText || 'your event text'}`}>
           <defs>
             <linearGradient id={`${id}-paper`} x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#fbf9f2" />
-              <stop offset="100%" stopColor="#f1ead9" />
+              <stop offset="0%" style={{ stopColor: 'var(--cream-soft)' }} />
+              <stop offset="100%" style={{ stopColor: 'var(--cream-deep)' }} />
             </linearGradient>
             <clipPath id={`${id}-logo`}>
               <rect x="300" y="24" width="96" height="60" rx="8" />
             </clipPath>
           </defs>
-          <rect x="4" y="4" width="412" height="292" rx="26" fill={`url(#${id}-paper)`} stroke="#183b2a" strokeOpacity="0.2" strokeWidth="2" />
-          <rect x="18" y="18" width="384" height="264" rx="18" fill="none" stroke="#183b2a" strokeOpacity="0.14" strokeDasharray="4 6" />
+          <rect x="4" y="4" width="412" height="292" rx="26" fill={`url(#${id}-paper)`} style={{ stroke: 'var(--forest)' }} strokeOpacity="0.2" strokeWidth="2" />
+          <rect x="18" y="18" width="384" height="264" rx="18" fill="none" style={{ stroke: 'var(--forest)' }} strokeOpacity="0.14" strokeDasharray="4 6" />
           {/* HuskySips identity (fixed) */}
           <text className="label-brand" x="32" y="62" fontSize="30">
             Husky<tspan className="sips">Sips</tspan>
@@ -65,19 +65,19 @@ export function LabelPreview({ onUseInEnquiry }: { onUseInEnquiry?: (text: strin
             <image href={logoUrl} x="300" y="24" width="96" height="60" preserveAspectRatio="xMidYMid meet" clipPath={`url(#${id}-logo)`} />
           ) : (
             <g>
-              <rect x="300" y="24" width="96" height="60" rx="8" fill="#fff" stroke="#183b2a" strokeOpacity="0.2" strokeDasharray="3 4" />
+              <rect x="300" y="24" width="96" height="60" rx="8" style={{ fill: 'var(--surface)', stroke: 'var(--forest)' }} strokeOpacity="0.2" strokeDasharray="3 4" />
               <text x="348" y="58" textAnchor="middle" className="label-fine">
                 your logo
               </text>
             </g>
           )}
           {/* Event text */}
-          <rect x="32" y="112" width="356" height="92" rx="14" fill="#183b2a" />
-          <text className="label-event" x="210" y={line2 ? 150 : 164} textAnchor="middle" fontSize={line1.length > 22 ? 20 : 26} fill="#f7f3e8">
+          <rect x="32" y="112" width="356" height="92" rx="14" style={{ fill: 'var(--forest)' }} />
+          <text className="label-event" x="210" y={line2 ? 150 : 164} textAnchor="middle" fontSize={line1.length > 22 ? 20 : 26} style={{ fill: 'var(--cream)' }}>
             {line1 || 'Your occasion · Your name'}
           </text>
           {line2 && (
-            <text className="label-event" x="210" y="184" textAnchor="middle" fontSize={line2.length > 22 ? 18 : 22} fill="#f2c84b">
+            <text className="label-event" x="210" y="184" textAnchor="middle" fontSize={line2.length > 22 ? 18 : 22} style={{ fill: 'var(--sage)' }}>
               {line2}
             </text>
           )}
