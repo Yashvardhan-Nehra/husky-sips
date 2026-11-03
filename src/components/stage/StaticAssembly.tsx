@@ -4,6 +4,7 @@ import { ButtonLink } from '@/components/ui/Button';
 import { Picture } from '@/components/ui/Picture';
 import { StageScene } from './StageScene';
 import { stepsFor } from './steps';
+import { getRecipePalette, paletteVars } from '@/config/palette';
 
 /** Reduced-motion / no-JS-animation version: poster + ordered steps. */
 export function StaticAssembly({ recipe }: { recipe: Recipe }) {
@@ -12,8 +13,9 @@ export function StaticAssembly({ recipe }: { recipe: Recipe }) {
   const extra = getExtra(recipe.extraId) ?? null;
   const steps = stepsFor(recipe, base, fruits, extra);
   const poster = recipe.photo ?? recipe.illustration;
+  const palette = getRecipePalette(recipe);
   return (
-    <section className="assembly assembly--static" id="assembly" aria-labelledby="assembly-title">
+    <section className="assembly assembly--static" id="assembly" style={paletteVars(palette)} aria-labelledby="assembly-title">
       <div className="container">
         <div className="assembly__static-grid">
           <div className="assembly__poster">

@@ -7,6 +7,7 @@ import { useIsMobile } from '@/lib/hooks';
 import { ButtonLink } from '@/components/ui/Button';
 import { DraftBadge } from '@/components/ui/Badge';
 import { draftsVisible } from '@/config/selectors';
+import { getRecipePalette, paletteVars } from '@/config/palette';
 import { StageScene } from './StageScene';
 import { stepsFor } from './steps';
 import { EXTRA_SLOT, FRUIT_SLOTS, POUR_LEVEL, DISPLACEMENT_PER_FRUIT, EXTRA_DISPLACEMENT, T, liquidOffsetFor } from './stageLayout';
@@ -25,6 +26,7 @@ export default function AssemblyScroll({ recipe }: { recipe: Recipe }) {
   const fruits = getRecipeFruits(recipe);
   const extra = getExtra(recipe.extraId) ?? null;
   const steps = stepsFor(recipe, base, fruits, extra);
+  const palette = getRecipePalette(recipe);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -148,7 +150,7 @@ export default function AssemblyScroll({ recipe }: { recipe: Recipe }) {
   }, [recipe.id, fruits.length, extra?.id, isMobile]);
 
   return (
-    <section className="assembly" id="assembly" ref={sectionRef} aria-labelledby="assembly-title">
+    <section className="assembly" id="assembly" ref={sectionRef} style={paletteVars(palette)} aria-labelledby="assembly-title">
       <a className="skip-link assembly__skip" href="#after-assembly">
         Skip the animation and go to the menu
       </a>

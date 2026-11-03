@@ -1,4 +1,5 @@
-/* HuskySips design tokens. Contrast-checked (WCAG) — see docs/CONTENT_GUIDE.md#colour. */
+/* HuskySips design tokens. Global brand palette; contrast-checked (WCAG AA) — see docs/CONTENT_GUIDE.md#colour.
+   Recipe-specific (ingredient-driven) palettes live in src/config/palette.ts. */
 @font-face {
   font-family: 'Fredoka';
   font-style: normal;
@@ -24,31 +25,64 @@
 :root {
   color-scheme: light;
 
-  /* Brand palette */
-  --cream: #f7f3e8;
-  --cream-deep: #efe8d6;
-  --cream-soft: #fbf9f2;
-  --forest: #183b2a;
-  --forest-2: #224d38;
-  --forest-3: #0f2a1d;
-  --leaf: #6d8c45;          /* decorative / large text only (3.45:1 on cream) */
-  --leaf-ink: #3e5627;      /* small text safe (7.4:1 on cream) */
-  --leaf-tint: #e7edd9;
-  --watermelon: #d94b49;    /* decorative / large text only (3.75:1 on cream) */
-  --watermelon-deep: #b3302f; /* button fill with white text (6.2:1) */
-  --watermelon-ink: #9e2a28;  /* small text safe (6.7:1 on cream) */
-  --watermelon-tint: #f9e1df;
-  --citrus: #f2c84b;        /* on forest only for text (7.7:1); never small text on cream */
-  --citrus-tint: #fbefc4;
-  --ink: #1b2a22;
-  --muted: #4f5f56;         /* 6.1:1 on cream */
+  /* ---------- Global brand palette: deep green · green-black · warm off-white ---------- */
+  --forest: #142b21;        /* Deep Forest Green — headings, primary buttons, active nav */
+  --forest-2: #243b2d;      /* Dark Moss Green — hover on forest, secondary dark surfaces */
+  --forest-3: #0c1812;      /* Almost Black Green — deepest surfaces (stage, player) */
+  --sage: #a8b89a;          /* Natural Sage — supporting accent; text on forest only (7.2:1) */
+  --sage-deep: #97a98a;     /* pressed / hover shade of sage */
+  --sage-ink: #566a4a;      /* sage for small text on cream (5.4:1) */
+  --sage-tint: #e6eadf;     /* sage wash for supporting sections and info surfaces */
+  --cream: #f7f4e9;         /* Warm Off-White — page background */
+  --cream-deep: #ede7d5;    /* Soft Cream — chips, tabs, alternate surfaces */
+  --cream-soft: #fbf9f2;    /* lightest cream — flat cards */
+  --neutral: #b7b7aa;       /* Muted Neutral Gray — dividers, inactive marks */
+  --neutral-ink: #6b6b60;   /* neutral gray safe for small text (4.9:1) */
+  --ink: #1a2420;           /* body text (14.5:1 on cream) */
+  --muted: #4f5d55;         /* secondary text (6.3:1 on cream) */
   --white: #ffffff;
 
-  --surface: #ffffff;
-  --surface-2: #fbf9f2;
-  --line: rgba(24, 59, 42, 0.14);
-  --line-strong: rgba(24, 59, 42, 0.28);
-  --focus: #b3302f;
+  /* Aliases kept for existing rules */
+  --leaf: #73905f;          /* decorative mid green (3.2:1 on cream) — never small text */
+  --leaf-ink: var(--sage-ink);
+  --leaf-tint: var(--sage-tint);
+
+  /* Surfaces & lines */
+  --surface: #fffdf8;
+  --surface-2: var(--cream-soft);
+  --line: rgba(20, 43, 33, 0.14);
+  --line-strong: rgba(20, 43, 33, 0.28);
+  --line-neutral: var(--neutral);
+  --focus: var(--forest);
+
+  /* Text & accents on dark (forest) surfaces */
+  --on-forest: var(--cream);
+  --on-forest-muted: rgba(247, 244, 233, 0.78);
+  --on-forest-soft: rgba(247, 244, 233, 0.6);
+  --on-forest-line: rgba(247, 244, 233, 0.18);
+  --on-forest-accent: var(--sage);
+
+  /* Semantic states — functional colours kept earthy so they sit inside the brand */
+  --success-tint: var(--sage-tint);
+  --success-ink: var(--sage-ink);
+  --info-tint: var(--sage-tint);
+  --info-ink: var(--sage-ink);
+  --info-line: #c5d0b8;
+  --warn-tint: #f1e7cc;
+  --warn-ink: #5c4812;
+  --warn-line: #d8c89c;
+  --danger: #9a3b33;        /* error fills, with warm-white text (6.8:1) */
+  --danger-ink: #8a2e27;    /* error text on cream (7.6:1) */
+  --danger-tint: #f3e2dd;
+  --danger-line: #e2bdb6;
+
+  /* Map markers (global, non-recipe) */
+  --map-popup: var(--forest);
+  --map-sales: var(--leaf);
+  --map-home: var(--neutral);
+
+  /* Recipe palettes are injected per section as --rp-* custom properties (src/config/palette.ts).
+     Rules read them with a brand fallback, e.g. var(--rp-primary, var(--forest)). */
 
   --font-display: 'Fredoka', 'Nunito', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-body: 'Nunito', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -59,9 +93,9 @@
   --radius-xl: 32px;
   --radius-pill: 999px;
 
-  --shadow-sm: 0 1px 2px rgba(24, 59, 42, 0.06), 0 2px 8px rgba(24, 59, 42, 0.06);
-  --shadow: 0 2px 6px rgba(24, 59, 42, 0.06), 0 12px 32px rgba(24, 59, 42, 0.10);
-  --shadow-lg: 0 8px 20px rgba(24, 59, 42, 0.12), 0 28px 64px rgba(24, 59, 42, 0.16);
+  --shadow-sm: 0 1px 2px rgba(20, 43, 33, 0.06), 0 2px 8px rgba(20, 43, 33, 0.06);
+  --shadow: 0 2px 6px rgba(20, 43, 33, 0.06), 0 12px 32px rgba(20, 43, 33, 0.1);
+  --shadow-lg: 0 8px 20px rgba(20, 43, 33, 0.12), 0 28px 64px rgba(20, 43, 33, 0.16);
 
   --space-1: 4px;
   --space-2: 8px;
@@ -173,7 +207,7 @@ a {
 }
 
 a:hover {
-  color: var(--watermelon-ink);
+  color: var(--sage-ink);
 }
 
 button,
@@ -191,7 +225,7 @@ textarea {
 }
 
 ::selection {
-  background: var(--citrus);
+  background: var(--sage);
   color: var(--forest);
 }
 

@@ -7,6 +7,7 @@ import { Badge, DraftBadge } from '@/components/ui/Badge';
 import { ButtonLink } from '@/components/ui/Button';
 import { Icon } from '@/components/ui/Icon';
 import { StageScene } from '@/components/stage/StageScene';
+import { getRecipePalette, paletteVars } from '@/config/palette';
 
 
 function availabilityText(): { label: string; variant: 'success' | 'info' | 'warn' | 'neutral' } {
@@ -36,9 +37,10 @@ export function ProductCard({ recipe, featured = false }: { recipe: Recipe; feat
   const availability = availabilityText();
   const upcoming = getUpcomingPopUps();
   const preorderable = upcoming.find(canPreorder);
+  const palette = getRecipePalette(recipe);
 
   return (
-    <article className="menu-card" aria-labelledby={`recipe-${recipe.id}`}>
+    <article className="menu-card" style={paletteVars(palette)} aria-labelledby={`recipe-${recipe.id}`}>
       <div className="menu-card__media">
         {image ? <Picture image={image} sizes="(max-width: 799px) 100vw, 40vw" priority={featured} showLabel={false} /> : <StageScene base={base} fruits={fruits} extra={extra} pose="final" title={`Illustration of ${recipe.name}`} />}
         {!recipe.photo && (

@@ -78,17 +78,17 @@ export default function FindUs() {
               {tab === 'popups' ? (
                 <>
                   <span>
-                    <i style={{ background: '#b3302f' }} /> Confirmed pop-up
+                    <i style={{ background: 'var(--map-popup)' }} /> Confirmed pop-up
                   </span>
                   {home && (
                     <span>
-                      <i style={{ background: '#6d8c45' }} /> Home base
+                      <i style={{ background: 'var(--map-home)' }} /> Home base
                     </span>
                   )}
                 </>
               ) : (
                 <span>
-                  <i style={{ background: '#183b2a' }} /> Verified paid cans fulfilled
+                  <i style={{ background: 'var(--map-sales)' }} /> Verified paid cans fulfilled
                 </span>
               )}
             </div>

@@ -1,6 +1,7 @@
 import { forwardRef, useId, type CSSProperties, type ReactElement } from 'react';
 import type { Base, Extra, Fruit } from '@/config/types';
 import { EXTRA_SLOT, FRUIT_SLOTS, STAGE, finalLevel, liquidOffsetFor } from './stageLayout';
+import { derivePalette, getIngredientPalette } from '@/config/palette';
 
 export type StagePose = 'animated' | 'final' | 'empty';
 
@@ -16,15 +17,36 @@ interface Props {
 
 const DEFAULT_LIQUID = { top: '#f6d98a', bottom: '#eeb06a' };
 
+/** Stage greens follow the global brand palette (deep forest → almost-black green). */
+const STAGE_COLORS = {
+  bgCenter: '#2b5240',
+  bgMid: '#1b3a2b',
+  bgEdge: '#0c1812',
+  pedestalTop: '#2e6246',
+  pedestalSheen: '#3b7557',
+  pedestalFrom: '#27503b',
+  pedestalTo: '#0f221a',
+  speckle: '#a8b89a',
+  metal: ['#9a9e94', '#eceee6', '#bdc0b4', '#8c9088'],
+} as const;
+
+/* Fruit vectors take their main fills from the ingredient palettes so illustration and UI agree. */
+const WATERMELON = getIngredientPalette('watermelon');
+const KIWI = getIngredientPalette('kiwi');
+const PINEAPPLE = getIngredientPalette('pineapple');
+const ORANGE = getIngredientPalette('orange');
+const COCONUT = getIngredientPalette('coconut');
+const MINT = getIngredientPalette('mint');
+
 /* ---------- Fruit vectors (edible-portion sized, ~56 units) ---------- */
 
 function WatermelonCube() {
   return (
     <g>
-      <path d="M-26 -22 h46 a6 6 0 0 1 6 6 v40 a6 6 0 0 1 -6 6 h-46 a6 6 0 0 1 -6 -6 v-40 a6 6 0 0 1 6 -6z" fill="#e2494c" />
+      <path d="M-26 -22 h46 a6 6 0 0 1 6 6 v40 a6 6 0 0 1 -6 6 h-46 a6 6 0 0 1 -6 -6 v-40 a6 6 0 0 1 6 -6z" fill={WATERMELON.secondary} />
       <path d="M-26 -22 h46 a6 6 0 0 1 6 6 v6 h-58 v-6 a6 6 0 0 1 6 -6z" fill="#ef6a6c" opacity="0.9" />
       <path d="M-32 22 h58 a0 0 0 0 1 0 0 v2 a6 6 0 0 1 -6 6 h-46 a6 6 0 0 1 -6 -6z" fill="#cfe3a6" />
-      <path d="M-32 26 h58 v2 a6 6 0 0 1 -6 6 h-46 a6 6 0 0 1 -6 -6z" fill="#6d8c45" opacity="0.85" />
+      <path d="M-32 26 h58 v2 a6 6 0 0 1 -6 6 h-46 a6 6 0 0 1 -6 -6z" fill={WATERMELON.leaf} opacity="0.85" />
       <ellipse cx="-13" cy="2" rx="2.2" ry="3.4" fill="#2b1b1b" transform="rotate(-35 -13 2)" />
       <ellipse cx="6" cy="-9" rx="2.2" ry="3.4" fill="#2b1b1b" transform="rotate(25 6 -9)" />
       <ellipse cx="10" cy="12" rx="1.9" ry="3" fill="#2b1b1b" transform="rotate(-60 10 12)" />
@@ -41,7 +63,7 @@ function KiwiSlice() {
   return (
     <g>
       <circle r="29" fill="#8b6a3a" />
-      <circle r="26.5" fill="#8fbf4a" />
+      <circle r="26.5" fill={KIWI.secondary} />
       <circle r="22" fill="#a9d35c" />
       <ellipse rx="8" ry="10" fill="#efe9c6" />
       {seeds}
@@ -53,7 +75,7 @@ function KiwiSlice() {
 function PineappleWedge() {
   return (
     <g>
-      <path d="M-30 24 L0 -26 L30 24 Z" fill="#f3c64a" />
+      <path d="M-30 24 L0 -26 L30 24 Z" fill={PINEAPPLE.secondary} />
       <path d="M-24 22 L0 -16 L24 22 Z" fill="#f7d978" opacity="0.6" />
       <g stroke="#d9a429" strokeWidth="1.5" opacity="0.8">
         <path d="M-16 8 L16 8 M-22 18 L22 18 M-8 -6 L8 -6" />
@@ -73,7 +95,7 @@ function PineappleWedge() {
 function OrangeSegment() {
   return (
     <g>
-      <path d="M-30 6 A30 30 0 0 1 30 6 Z" fill="#f08a1d" />
+      <path d="M-30 6 A30 30 0 0 1 30 6 Z" fill={ORANGE.secondary} />
       <path d="M-26 6 A26 26 0 0 1 26 6 Z" fill="#fde3b5" />
       <path d="M-23 6 A23 23 0 0 1 23 6 Z" fill="#f7a93a" />
       <g stroke="#fde3b5" strokeWidth="1.6">
@@ -87,7 +109,7 @@ function OrangeSegment() {
 function CoconutChunk() {
   return (
     <g>
-      <path d="M-26 -10 q10 -18 30 -14 q20 4 20 20 q-2 18 -18 20 q-24 4 -32 -8 q-6 -8 0 -18z" fill="#6b4426" />
+      <path d="M-26 -10 q10 -18 30 -14 q20 4 20 20 q-2 18 -18 20 q-24 4 -32 -8 q-6 -8 0 -18z" fill={COCONUT.primary} />
       <path d="M-22 -8 q10 -14 26 -11 q16 4 16 16 q-2 14 -15 16 q-20 3 -27 -6 q-5 -6 0 -15z" fill="#fbf7ee" />
       <path d="M-14 -2 q10 -6 22 -2" stroke="#e8dfcd" strokeWidth="2" fill="none" strokeLinecap="round" />
     </g>
@@ -98,7 +120,7 @@ function MintSprig() {
   return (
     <g>
       <path d="M0 18 L0 -4" stroke="#3f7a32" strokeWidth="2.4" strokeLinecap="round" />
-      <path d="M0 -2 q-20 -2 -24 -22 q20 -2 24 22z" fill="#5fa348" />
+      <path d="M0 -2 q-20 -2 -24 -22 q20 -2 24 22z" fill={MINT.secondary} />
       <path d="M0 -2 q20 -2 24 -22 q-20 -2 -24 22z" fill="#4c8a3a" />
       <path d="M-4 -6 q-8 -6 -14 -14 M4 -6 q8 -6 14 -14" stroke="#2f5f27" strokeWidth="1.2" fill="none" />
     </g>
@@ -123,7 +145,7 @@ const EXTRA_VECTORS: Record<string, () => ReactElement> = {
 };
 
 function GenericPiece() {
-  return <circle r="24" fill="#f2c84b" stroke="#c98a2b" strokeWidth="2" />;
+  return <circle r="24" fill={PINEAPPLE.secondary} stroke={PINEAPPLE.primary} strokeWidth="2" />;
 }
 
 /* ---------- Scene ---------- */
@@ -131,6 +153,7 @@ function GenericPiece() {
 export const StageScene = forwardRef<SVGSVGElement, Props>(function StageScene({ base, fruits, extra, pose = 'animated', compact = false, title }, ref) {
   const uid = useId().replace(/:/g, '');
   const colors = base?.liquidColor ?? DEFAULT_LIQUID;
+  const palette = derivePalette([...fruits.map((f) => f.id), extra?.id]);
   const isFinal = pose === 'final';
   const isEmpty = pose === 'empty';
   const level = isFinal ? finalLevel(fruits.length, !!extra) : 0;
@@ -142,13 +165,13 @@ export const StageScene = forwardRef<SVGSVGElement, Props>(function StageScene({
     <svg ref={ref} className={['stage-svg', compact ? 'stage-svg--compact' : ''].join(' ').trim()} viewBox={`0 0 ${STAGE.width} ${STAGE.height}`} preserveAspectRatio="xMidYMid slice" role="img" aria-label={label} focusable="false">
       <defs>
         <radialGradient id={`${uid}-bg`} cx="50%" cy="32%" r="70%">
-          <stop offset="0%" stopColor="#2f6246" />
-          <stop offset="55%" stopColor="#1c4531" />
-          <stop offset="100%" stopColor="#0f2a1d" />
+          <stop offset="0%" stopColor={STAGE_COLORS.bgCenter} />
+          <stop offset="55%" stopColor={STAGE_COLORS.bgMid} />
+          <stop offset="100%" stopColor={STAGE_COLORS.bgEdge} />
         </radialGradient>
         <radialGradient id={`${uid}-glow`} cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#f2c84b" stopOpacity="0.55" />
-          <stop offset="100%" stopColor="#f2c84b" stopOpacity="0" />
+          <stop offset="0%" stopColor={palette.secondary} stopOpacity="0.5" />
+          <stop offset="100%" stopColor={palette.secondary} stopOpacity="0" />
         </radialGradient>
         <linearGradient id={`${uid}-liquid`} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor={colors.top} />
@@ -161,14 +184,14 @@ export const StageScene = forwardRef<SVGSVGElement, Props>(function StageScene({
           <stop offset="100%" stopColor="#ffffff" stopOpacity="0.2" />
         </linearGradient>
         <linearGradient id={`${uid}-metal`} x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor="#9aa3a6" />
-          <stop offset="30%" stopColor="#e9eef0" />
-          <stop offset="55%" stopColor="#b8c0c3" />
-          <stop offset="100%" stopColor="#8b9497" />
+          <stop offset="0%" stopColor={STAGE_COLORS.metal[0]} />
+          <stop offset="30%" stopColor={STAGE_COLORS.metal[1]} />
+          <stop offset="55%" stopColor={STAGE_COLORS.metal[2]} />
+          <stop offset="100%" stopColor={STAGE_COLORS.metal[3]} />
         </linearGradient>
         <linearGradient id={`${uid}-pedestal`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#2a5a40" />
-          <stop offset="100%" stopColor="#102e20" />
+          <stop offset="0%" stopColor={STAGE_COLORS.pedestalFrom} />
+          <stop offset="100%" stopColor={STAGE_COLORS.pedestalTo} />
         </linearGradient>
         <clipPath id={`${uid}-inner`}>
           <rect x={inner.x} y={inner.y} width={inner.w} height={inner.h} rx={inner.rx} />
@@ -188,9 +211,9 @@ export const StageScene = forwardRef<SVGSVGElement, Props>(function StageScene({
       <g data-layer="pedestal">
         <ellipse cx={STAGE.centerX} cy="528" rx="150" ry="18" fill="#000" opacity="0.35" filter={`url(#${uid}-soft)`} />
         <path d={`M ${STAGE.centerX - 132} ${STAGE.pedestalTopY} h 264 v 34 a 132 20 0 0 1 -264 0 z`} fill={`url(#${uid}-pedestal)`} />
-        <ellipse cx={STAGE.centerX} cy={STAGE.pedestalTopY} rx="132" ry="20" fill="#2f6a4b" />
-        <ellipse cx={STAGE.centerX} cy={STAGE.pedestalTopY} rx="120" ry="15" fill="#3a7a58" opacity="0.5" />
-        <g fill="#cfe3a6" opacity="0.25">
+        <ellipse cx={STAGE.centerX} cy={STAGE.pedestalTopY} rx="132" ry="20" fill={STAGE_COLORS.pedestalTop} />
+        <ellipse cx={STAGE.centerX} cy={STAGE.pedestalTopY} rx="120" ry="15" fill={STAGE_COLORS.pedestalSheen} opacity="0.5" />
+        <g fill={STAGE_COLORS.speckle} opacity="0.25">
           <circle cx="120" cy="474" r="1.2" />
           <circle cx="160" cy="482" r="1" />
           <circle cx="250" cy="486" r="1.4" />

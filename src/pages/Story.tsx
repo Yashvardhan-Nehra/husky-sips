@@ -57,7 +57,7 @@ export default function Story() {
                 <h4 style={{ color: 'var(--cream)' }}>
                   {m.title} {m.verified ? '' : <Badge variant="outline">Ahead</Badge>}
                 </h4>
-                <p style={{ color: 'rgba(247,243,232,0.78)' }}>
+                <p style={{ color: 'var(--on-forest-muted)' }}>
                   {m.detail}
                   {m.date ? ` (${formatDateShort(m.date)})` : ''}
                 </p>
